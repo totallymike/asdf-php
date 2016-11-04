@@ -89,6 +89,7 @@ os_based_configure_options() {
     local libxml2_path=$(homebrew_package_path libxml2)
     local zlib_path=$(homebrew_package_path zlib)
     local readline_path=$(homebrew_package_path readline)
+    local mcrypt_path=$(homebrew_package_path mcrypt)
 
     if [ "$freetype_path" = "" ]; then
       export ASDF_PKG_MISSING="freetype"
@@ -122,6 +123,12 @@ os_based_configure_options() {
       export ASDF_PKG_MISSING="$ASDF_PKG_MISSING libpng"
     else
       configure_options="$configure_options --with-png-dir=$libpng_path"
+    fi
+
+    if [ "$mcrypt_path" = "" ]; then
+      export MCRYPT_PKG_MISSING="MCRYPT_PKG_MISSING mcrypt"
+    else
+      configure_options="$configure_options --with-mcrypt=$mcrypt_path"
     fi
 
     if [ "$openssl_path" = "" ]; then
